@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupo de Eventos - Stands e Cenografia</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #f39c12;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-lM815ujuiFqCsqhrmzXla4WNAk0fKz.png');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            margin-top: 80px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .cta-button {
+            background: #f39c12;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .cta-button:hover {
+            background: #e67e22;
+        }
+
+        /* About Section */
+        .about {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #2c3e50;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* Catalog Section */
+        .catalog {
+            padding: 80px 0;
+        }
+
+        .catalog h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+        }
+
+        .project-showcase {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s;
+            cursor: pointer;
+            background: white;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .project-info {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .project-info h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        .project-info p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-badge {
+            display: inline-block;
+            background: #f39c12;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .view-project-btn {
+            background: #3498db;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .view-project-btn:hover {
+            background: #2980b9;
+        }
+
+        /* Project Modal */
+        .project-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow-y: auto;
+        }
+
+        .project-modal-content {
+            position: relative;
+            margin: 2% auto;
+            width: 95%;
+            max-width: 1200px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .modal-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .modal-body {
+            display: flex;
+            flex-direction: column;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        /* Slideshow */
+        .slideshow-container {
+            position: relative;
+            background: #f8f9fa;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .slide {
+            display: none;
+            position: relative;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+
+        .slide-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            padding: 2rem;
+        }
+
+        .slide-caption h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Navigation */
+        .prev,
+        .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 1rem;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: background 0.3s;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+        .prev:hover,
+        .next:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Dots indicator */
+        .dots-container {
+            text-align: center;
+            padding: 1rem;
+            background: #f8f9fa;
+        }
+
+        .dot {
+            height: 12px;
+            width: 12px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dot.active,
+        .dot:hover {
+            background-color: #3498db;
+        }
+
+        /* Project Details */
+        .project-details {
+            background: #f8f9fa;
+            padding: 3%;
+            border-radius: 10px;
+        }
+
+        .project-details h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .project-specs {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-specs img {
+            width: 100%;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+
+        .spec-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .spec-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+            font-size: 0.9rem;
+        }
+
+        .spec-list li:last-child {
+            border-bottom: none;
+        }
+
+        .spec-list li strong {
+            color: #2c3e50;
+        }
+
+        /* Close button */
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 2001;
+        }
+
+        .close-modal:hover {
+            color: #f39c12;
+        }
+
+        /* Seller Section */
+        .seller {
+            padding: 80px 0;
+            background: #2c3e50;
+            color: white;
+        }
+
+        .seller-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .seller-photo {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #3498db;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .seller-info h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .seller-info h3 {
+            font-size: 1.5rem;
+            color: #f39c12;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-item i {
+            color: #3498db;
+            width: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content,
+            .seller-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-body {
+                grid-template-columns: 1fr;
+                padding: 0px;
+            }
+
+            .project-modal-content {
+                width: 98%;
+                margin: 1% auto;
+                border-radius: 0px;
+            }
+
+
+            .project-details {
+                padding: 2%;
+                border-radius: 0;
+            }
+            .slideshow-container{
+                border-radius: 0px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">Grupo de Eventos</div>
+            <ul class="nav-links">
+                <li><a href="#home">Início</a></li>
+                <li><a href="#about">Sobre</a></li>
+                <li><a href="#catalog">Catálogo</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Transformamos Eventos em Experiências Únicas</h1>
+                <p>28 anos criando stands inovadores e cenografias exclusivas</p>
+                <button class="cta-button" onclick="scrollToSection('catalog')">
+                    Ver Nossos Projetos
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Sobre a Grupo de Eventos</h2>
+                    <p>Especialistas em desenvolver experiência de marca por meio de projetos exclusivos, a Grupo de
+                        Eventos se destaca pela inovação, oferecendo projetos e montagem de estandes, cenografia e
+                        projetos especiais.</p>
+                    <p>Ao longo de 28 anos, desenvolvemos expertise necessária para transformar seu evento em grandes
+                        momentos, contamos com uma estrutura com 3.500m² para pré-montar o seu estande e 7.500m² de
+                        fábrica, possibilitando que acompanhe o desenvolvimento de seu projeto in loco.</p>
+                    <p>Nos destacamos pela criatividade e inovação, permitindo que você tenha estandes modernos e
+                        personalização, já que estamos sempre atentos às tendências do mercado. Trabalhamos com
+                        responsabilidade ambiental, todo nosso processo é cuidadosamente pensado, evitando desperdício,
+                        garantindo o descarte correto dos materiais e uso de madeira de reflorestamento.</p>
+                </div>
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number">28</div>
+                        <div class="stat-label">Anos de Experiência</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">3.500m²</div>
+                        <div class="stat-label">Área de Pré-montagem</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">7.500m²</div>
+                        <div class="stat-label">Área de Fábrica</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Sustentável</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catalog Section -->
+    <section id="catalog" class="catalog">
+        <div class="container">
+            <h2>Projeto em Destaque</h2>
+            <div class="project-showcase">
+                <div class="project-card" onclick="openProjectModal()">
+                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-lM815ujuiFqCsqhrmzXla4WNAk0fKz.png"
+                        alt="Stand Universo dos Livros" class="project-image">
+                    <div class="project-info">
+                        <div class="project-badge">Projeto Editorial</div>
+                        <h3>Grupo Editorial Universo dos Livros</h3>
+                        <p>Stand completo com design temático personalizado, múltiplas áreas funcionais e elementos
+                            cenográficos exclusivos. Projeto desenvolvido com 220m² de área total.</p>
+                        <button class="view-project-btn">
+                            <i class="fas fa-eye"></i> Ver Projeto Completo
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Modal -->
+    <div id="projectModal" class="project-modal">
+        <div class="project-modal-content">
+            <span class="close-modal" onclick="closeProjectModal()">&times;</span>
+
+            <div class="modal-header">
+                <h2>Grupo Editorial Universo dos Livros</h2>
+                <p>Stand Editorial Completo - 220m²</p>
+            </div>
+
+            <div class="modal-body">
+                <div class="slideshow-container">
+                    <div class="slide active">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-lM815ujuiFqCsqhrmzXla4WNAk0fKz.png"
+                            alt="Vista Frontal Completa">
+                        <div class="slide-caption">
+                            <h4>Vista Frontal Completa</h4>
+                            <p>Visão geral do stand com todos os elementos integrados</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-03thp8RKiqk4QPjL0mXws4gjGRSVFa.png"
+                            alt="Vista Lateral">
+                        <div class="slide-caption">
+                            <h4>Vista Lateral</h4>
+                            <p>Perspectiva lateral mostrando a profundidade do projeto</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-hyfWGzZVsSzNG4mgf7OHiTXD3dCbGi.png"
+                            alt="Ângulo Diagonal">
+                        <div class="slide-caption">
+                            <h4>Ângulo Diagonal</h4>
+                            <p>Vista diagonal destacando elementos temáticos</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-kPKCuHH8vPQ3PYWiSbyKMjZdj5c374.png"
+                            alt="Vista Central">
+                        <div class="slide-caption">
+                            <h4>Vista Central</h4>
+                            <p>Painel central com design gótico personalizado</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-hwogyR4AZECZUMkhyOZT6NfSvYK27J.png"
+                            alt="Vista Panorâmica">
+                        <div class="slide-caption">
+                            <h4>Vista Panorâmica</h4>
+                            <p>Extensão completa do projeto</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-CRyH3o8yEWplRqGx22fssa5txxn9lM.png"
+                            alt="Área Funcional">
+                        <div class="slide-caption">
+                            <h4>Área Funcional</h4>
+                            <p>Espaço com painéis vazados e iluminação integrada</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-jv9UNhvrh7JVejjZBRFOVVvEMuLbMf.png"
+                            alt="Interior do Stand">
+                        <div class="slide-caption">
+                            <h4>Interior do Stand</h4>
+                            <p>Vista interna com organização de produtos</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-xjUOBOBvnBjKAcA9uB7H03vfRgXNO6.png"
+                            alt="Área Central">
+                        <div class="slide-caption">
+                            <h4>Área Central</h4>
+                            <p>Espaço interativo com disposição piramidal</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-wUnRf1urmvHY8Ju0ZK7mJ9EHB7GzRW.png"
+                            alt="Painel Principal">
+                        <div class="slide-caption">
+                            <h4>Painel Principal</h4>
+                            <p>Backdrop principal com elementos temáticos</p>
+                        </div>
+                    </div>
+
+                    <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+                    <button class="next" onclick="changeSlide(1)">&#10095;</button>
+
+                    <div class="dots-container">
+                        <span class="dot active" onclick="currentSlide(1)"></span>
+                        <span class="dot" onclick="currentSlide(2)"></span>
+                        <span class="dot" onclick="currentSlide(3)"></span>
+                        <span class="dot" onclick="currentSlide(4)"></span>
+                        <span class="dot" onclick="currentSlide(5)"></span>
+                        <span class="dot" onclick="currentSlide(6)"></span>
+                        <span class="dot" onclick="currentSlide(7)"></span>
+                        <span class="dot" onclick="currentSlide(8)"></span>
+                        <span class="dot" onclick="currentSlide(9)"></span>
+                    </div>
+                </div>
+
+
+                <div class="project-details">
+                    <h3>Especificações Técnicas</h3>
+                    <div class="project-specs">
+                        <ul class="spec-list">
+                            <li><strong>Área Total:</strong> 220m²</li>
+                            <li><strong>Logotipos:</strong> Letra caixa L= 3,50m x H=1,80m</li>
+                            <li><strong>Logotipos:</strong> Letra caixa L= 1,40m x H=0,80m</li>
+                            <li><strong>Logotipos:</strong> Letra caixa L= 1,40m x H=0,80m</li>
+                            <li><strong>Imagens:</strong> L= 6,70m x H=1,90m</li>
+                            <li><strong>Imagens:</strong> L= 3,50m x H=4,60m</li>
+                            <li><strong>Imagens:</strong> L= 6,50m x H=2,00m</li>
+                            <li><strong>Logotipos:</strong> Letra caixa L= 1,40m x H=0,80m</li>
+                            <li><strong>Imagens:</strong> L= 4,50m x H=3,30m</li>
+                            <li><strong>TV:</strong> 55 polegadas</li>
+                            <li><strong>Painel de Led:</strong> L= 3,50m x H=2,50m</li>
+                        </ul>
+                    </div>
+
+                    <h3>Características do Projeto</h3>
+                    <div class="project-specs">
+                        <ul class="spec-list">
+                            <li><strong>Tema:</strong> Design gótico/terror personalizado</li>
+                            <li><strong>Materiais:</strong> Estrutura modular com acabamentos premium</li>
+                            <li><strong>Iluminação:</strong> Sistema profissional com spots direcionados</li>
+                            <li><strong>Áreas:</strong> Exposição, atendimento e interação</li>
+                            <li><strong>Elementos:</strong> Painéis temáticos, totens e displays</li>
+                            <li><strong>Sustentabilidade:</strong> Madeira de reflorestamento</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Seller Section -->
+    <section id="contact" class="seller">
+        <div class="container">
+            <div class="seller-content">
+                <div>
+                    <a href="https://www.linkedin.com/in/gabriel-alberto-01b3571a4/" target="_blank" rel="noopener noreferrer">
+                        <img src="https://media.licdn.com/dms/image/v2/D4D03AQGR3E8chXLx1g/profile-displayphoto-shrink_400_400/B4DZXs4VIcH4Ag-/0/1743435946639?e=1755129600&v=beta&t=U1RhrLwEEhaDgLw8iopwvXdy5C7CHwmEeYyYSxNfG-0" alt="Consultor Comercial"
+                            class="seller-photo">
+                    </a>
+                </div>
+                <div class="seller-info">
+                    <h2>Seu Consultor Comercial</h2>
+                    <h3>Especialista em Stands e Cenografia</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>comercial9@grupodeeventos.com.br</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+55 (11) 4447-4468</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-whatsapp"></i>
+                            <a href="javascript:void(0)" onclick="openWhatsAppDirect()"
+                                style="color: white; text-decoration: none; cursor: pointer;">
+                                +55 (11) 911278302
+                            </a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Segunda a Sexta: 8h às 18h</span>
+                        </div>
+                    </div>
+                    <button class="cta-button" style="margin-top: 2rem;" onclick="openWhatsApp()">
+                        <i class="fab fa-whatsapp"></i> Fale Conosco no WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Grupo de Eventos. Todos os direitos reservados.</p>
+            <p>28 anos transformando eventos em experiências memoráveis</p>
+        </div>
+    </footer>
+
+    <script>
+        let slideIndex = 1;
+
+        // Smooth scrolling
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Project Modal
+        function openProjectModal() {
+            document.getElementById('projectModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProjectModal() {
+            document.getElementById('projectModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Slideshow functions
+        function changeSlide(n) {
+            showSlide(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlide(slideIndex = n);
+        }
+
+        function showSlide(n) {
+            let slides = document.getElementsByClassName('slide');
+            let dots = document.getElementsByClassName('dot');
+
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove('active');
+            }
+
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].classList.remove('active');
+            }
+
+            slides[slideIndex - 1].classList.add('active');
+            dots[slideIndex - 1].classList.add('active');
+        }
+
+        // Auto slideshow (optional)
+        function autoSlide() {
+            slideIndex++;
+            if (slideIndex > document.getElementsByClassName('slide').length) {
+                slideIndex = 1;
+            }
+            showSlide(slideIndex);
+        }
+
+        // WhatsApp integration
+        function openWhatsApp() {
+            const phoneNumber = '5511911278302';
+            const message = 'Olá! Gostaria de saber mais sobre os stands e projetos da Grupo de Eventos.';
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        function openWhatsAppDirect() {
+            const phoneNumber = '5511911278302';
+            const message = 'Olá! Vi o projeto do Universo dos Livros e gostaria de saber mais sobre os serviços da Grupo de Eventos.';
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function (event) {
+            const modal = document.getElementById('projectModal');
+            if (event.target === modal) {
+                closeProjectModal();
+            }
+        }
+
+        // Navigation scroll effect
+        window.addEventListener('scroll', function () {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(44, 62, 80, 0.95)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, #2c3e50, #3498db)';
+            }
+        });
+
+        // Animate stats on scroll
+        function animateStats() {
+            const stats = document.querySelectorAll('.stat-number');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = entry.target;
+                        const finalValue = target.textContent;
+                        let currentValue = 0;
+                        const increment = finalValue.includes('m²') ? 100 : 1;
+                        const timer = setInterval(() => {
+                            if (finalValue.includes('m²')) {
+                                currentValue += increment;
+                                if (currentValue >= parseInt(finalValue)) {
+                                    currentValue = parseInt(finalValue);
+                                    clearInterval(timer);
+                                }
+                                target.textContent = currentValue + 'm²';
+                            } else if (finalValue.includes('%')) {
+                                currentValue += 2;
+                                if (currentValue >= parseInt(finalValue)) {
+                                    currentValue = parseInt(finalValue);
+                                    clearInterval(timer);
+                                }
+                                target.textContent = currentValue + '%';
+                            } else {
+                                currentValue += 1;
+                                if (currentValue >= parseInt(finalValue)) {
+                                    currentValue = parseInt(finalValue);
+                                    clearInterval(timer);
+                                }
+                                target.textContent = currentValue;
+                            }
+                        }, 50);
+                    }
+                });
+            });
+
+            stats.forEach(stat => observer.observe(stat));
+        }
+
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', function () {
+            animateStats();
+        });
+
+        // Keyboard navigation for slideshow
+        document.addEventListener('keydown', function (event) {
+            if (document.getElementById('projectModal').style.display === 'block') {
+                if (event.key === 'ArrowLeft') {
+                    changeSlide(-1);
+                } else if (event.key === 'ArrowRight') {
+                    changeSlide(1);
+                } else if (event.key === 'Escape') {
+                    closeProjectModal();
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
